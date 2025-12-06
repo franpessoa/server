@@ -1,0 +1,22 @@
+ - name: Clone + Compose Up
+   hosts: servers
+   tasks:
+      - name: Clone Repo
+        ansible.builtin.git:
+          repo: https://github.com/franpessoa/server
+          dest: /home/cisco/config/
+          clone: yes
+          recursive: yes
+          version: main
+      - name: Compose Down
+        community.docker.docker_compose_v2:
+         project_src: config/compose
+         state: absent
+      - name: Compose Up
+        community.docker.docker_compose_v2:
+          project_src: config/compose
+        register: output
+      - name: Show results
+        ansible.builtin.debug:
+          var: output
+   become: true
