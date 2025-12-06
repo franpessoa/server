@@ -1,0 +1,2 @@
+play playbook:
+    ansible-playbook {{playbook}} -i inventory.yaml -K

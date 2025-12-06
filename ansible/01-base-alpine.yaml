@@ -17,6 +17,9 @@
        community.general.apk:
          name: docker,docker-cli-compose
          state: present
+     - name: Install Git
+       community.general.apk:
+         name: git
+         state: present
    become: true
    become_method: doas
-       

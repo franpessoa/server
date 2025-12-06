@@ -1,0 +1,6 @@
+services:
+  whoami:
+    image: traefik/whoami
+    port: 2001:2001
+    command:
+       - --port=2001
