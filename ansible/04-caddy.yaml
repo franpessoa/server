@@ -21,6 +21,7 @@
         ansible.builtin.copy:
           src: /home/cisco/config/caddy/Caddyfile
           dest: /etc/caddy/Caddyfile
+          remote_src: true
       - name: Reload caddy
         ansible.builtin.service:
           name: caddy
