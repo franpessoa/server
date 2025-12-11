@@ -1,0 +1,27 @@
+ - name: Setup and run caddy
+   hosts: servers
+   become: true
+   tasks:
+      - name: Install caddy
+        community.general.apk:
+          name: caddy
+          state: present
+      - name: Start caddy
+        ansible.builtin.service:
+          name: caddy
+          state: started
+      - name: Pull Caddyfile
+        ansible.builtin.git:
+          repo: https://github.com/franpessoa/server
+          dest: /home/cisco/config/
+          clone: yes
+          recursive: yes
+          version: main
+      - name: Copy Caddyfile
+        ansible.builtin.copy:
+          src: /home/cisco/config/caddy/Caddyfile
+          dest: /etc/caddy/Caddyfile
+      - name: Reload caddy
+        ansible.builtin.service:
+          name: caddy
+          state: restarted
